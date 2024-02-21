@@ -36,9 +36,16 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Sets current version
+        id: set-current-version
+        run: |
+          echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
+
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
+        env:
+          IMAGE_TAG: ${{ steps.set-current-version.outputs.SOURCE_TAG }}
         with:
           push: true
-          tags: siluanaklein/continuous-integration-sonarqube:${{ steps.set-current-version.outputs.SOURCE_TAG }}
+          tags: siluanaklein/continuous-integration-sonarqube:$IMAGE_TAG
