@@ -1,0 +1,13 @@
+name: ci-node-workflow
+on: [push]
+jobs:
+  build-test-application:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2 # baixa o código do repo na máquina, faz o git checkout
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 17.9.1
+      - run: npm run test
+      - run: npm run start
