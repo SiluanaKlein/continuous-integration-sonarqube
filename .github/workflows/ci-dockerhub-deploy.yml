@@ -15,6 +15,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 17.9.1
+      - run: npm ci
       - run: npm run test
 
   build-and-push-docker-image:
