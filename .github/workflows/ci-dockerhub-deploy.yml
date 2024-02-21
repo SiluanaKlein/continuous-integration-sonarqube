@@ -7,8 +7,7 @@ on:
       - "v[0-9]+.[0-9]+.[0-9]+"
 
 env:
-  DOCKERHUB_USER: siluanaklein
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: siluanaklein/${{ github.repository }}
 
 jobs:
   build-test-application:
@@ -44,7 +43,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.DOCKERHUB_USER }}/${{ env.IMAGE_NAME }}
+          images:${{ env.IMAGE_NAME }}
 
       - name: Build and push
         id: docker_build
